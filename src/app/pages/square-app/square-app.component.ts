@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { square } from 'src/app/models/square.model';
-import {SquareService } from '../../square.service'
+import { SquareService } from '../../square.service'
 // import service
 @Component({
   selector: 'app-square-app',
@@ -8,16 +8,13 @@ import {SquareService } from '../../square.service'
   styleUrls: ['./square-app.component.scss']
 })
 export class SquareAppComponent implements OnInit {
- squares : square[] = []
-  constructor( private squareService : SquareService) {
- 
+  squares: square[] = []
+  constructor(private squareService: SquareService) {}
 
-   }
+  async ngOnInit(): Promise<void> {
 
-  ngOnInit(): void {
-   this.squares = this.squareService.query()
-
-    // squares = squars from service
+    this.squares = await this.squareService.query()
+    console.log(this.squares);
   }
 
 }

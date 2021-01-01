@@ -1,26 +1,26 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { square} from '../../models/square.model'
-import {SquareService } from '../../square.service'
-//import service
+import { square } from '../../models/square.model'
+import { SquareService } from '../../square.service'
+
 @Component({
   selector: 'app-square-details',
   templateUrl: './square-details.component.html',
   styleUrls: ['./square-details.component.scss']
 })
 export class SquareDetailsComponent implements OnInit {
-  constructor(private squareService : SquareService) { }
-  @Input() square : square
- 
+  constructor(private squareService: SquareService) { }
+  @Input() square: square
+
   id = null
- color = ""
+  color = ""
   ngOnInit(): void {
-    if(square) {
+    if (this.square) {
       this.color = this.square.color
       this.id = this.square.id
 
     }
-    
-   
+
+
   }
 
   onChangeColor() {
@@ -32,12 +32,9 @@ export class SquareDetailsComponent implements OnInit {
     }
 
     this.color = color
-    // let id = this.square.id
-    
-    
-    this.squareService.updateSquare(this.id, color)
-
+    this.square.color = color
+    this.squareService.updateSquare(this.square)
 
   }
- 
+
 }

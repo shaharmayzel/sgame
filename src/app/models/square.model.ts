@@ -1,3 +1,4 @@
-export class square {
-color : string
+export interface square {
+    color: string
+    id: number
 }

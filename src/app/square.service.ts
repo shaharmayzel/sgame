@@ -1,12 +1,29 @@
-import { Injectable } from '@angular/core';
-import { square } from '../app/models/square.model'
-//import http
+import {
+Injectable
+} from '@angular/core';
+import {
+  square
+} from '../app/models/square.model'
+import {
+  AngularFirestore,
+  AngularFirestoreCollection
+} from 'angularfire2/firestore'
+import {
+  Observable
+} from 'rxjs';
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class SquareService {
-  squares = []
-  constructor() { } // importim
+
+  squaresCollection: AngularFirestoreCollection<square>
+  squares: Observable<square[]>
+
+  constructor(public db: AngularFirestore) {
+    this.squaresCollection = db.collection<square>('squares');
+  }
 
   createId() {
     let id = Math.floor(Math.random() * 300) + 100;
@@ -29,34 +46,59 @@ export class SquareService {
     return square
   }
 
-  public makeSquareArray() {
-    let square = []
+
+
+  public createSquareArray() {
+
     for (let i = 0; i < 9; i++) {
-      square.push(this.createSquare())
+      this.squaresCollection.add(this.createSquare())
+      console.log(i);
+
     }
-    this.squares = square
-    console.log(this.squares);
 
   }
-  //query return squares
-  public query(): square[] {
-    this.makeSquareArray()
-    return this.squares
+
+
+  public loadSquares() {
+    let squares = []
+    this.squaresCollection.ref.get().then(data => {
+      data.forEach(square => {
+        squares.push(square.data())
+      });
+
+    })
+    return squares
+  }
+
+  public saveSquares(squares) {
+    squares.forEach(square => {
+      this.squaresCollection.add(square)
+    })
+  }
+
+  public updateSquare(square) {
+    let dbid = null
+    this.squaresCollection.ref.get().then(data => {
+      data.forEach(dbsquare => {
+        if (dbsquare.data().id === square.id) {
+          dbid = dbsquare.id
+          this.squaresCollection.doc(dbid).update(square)
+          console.log(dbid, square);
+        }
+      });
+    })
+
 
   }
-  public getIndexById(id) {
-    let squares = this.squares
-    let square = squares.find(square => square.id === id);
-    let index = this.squares.indexOf(square)
-    return index
-  
-    
+
+  public query(): any {
+    let squares = []
+    this.squaresCollection.ref.get().then(data => {
+      data.forEach(square => {
+        squares.push(square.data())
+      });
+    })
+    return squares
   }
-  public updateSquare(squareId, newColor) {
-    let indexOfSquare = this.getIndexById(squareId)
-    this.squares[indexOfSquare].color = newColor
-  }
+
 }
-
-
-

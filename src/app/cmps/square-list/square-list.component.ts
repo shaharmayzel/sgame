@@ -8,10 +8,7 @@ import { square } from 'src/app/models/square.model';
 })
 export class SquareListComponent implements OnInit {
   @Input() squares : square[]
-
   constructor() { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }
