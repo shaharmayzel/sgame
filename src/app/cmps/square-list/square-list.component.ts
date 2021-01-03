@@ -1,5 +1,7 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { square } from 'src/app/models/square.model';
+
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-square-list',
@@ -7,8 +9,8 @@ import { square } from 'src/app/models/square.model';
   styleUrls: ['./square-list.component.scss']
 })
 export class SquareListComponent implements OnInit {
-  @Input() squares : square[]
+  @Input() squares: square[]
   constructor() { }
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
 }

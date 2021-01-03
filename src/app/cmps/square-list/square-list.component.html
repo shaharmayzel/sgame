@@ -1,6 +1,8 @@
-<div class="square-container ">
-    <div  *ngFor="let square of squares ">
-        <app-square-details class="square-wrap" [square] = "square"></app-square-details>
-    </div>
-    
+<div class="square-container">
+  <div *ngFor="let square of squares | async">
+    <app-square-details
+      class="square-wrap"
+      [square]="square"
+    ></app-square-details>
+  </div>
 </div>

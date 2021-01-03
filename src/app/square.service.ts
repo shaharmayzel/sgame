@@ -1,16 +1,16 @@
 import {
-Injectable
+  Injectable
 } from '@angular/core';
 import {
   square
 } from '../app/models/square.model'
 import {
   AngularFirestore,
-  AngularFirestoreCollection
+  AngularFirestoreCollection,
+  AngularFirestoreDocument
 } from 'angularfire2/firestore'
-import {
-  Observable
-} from 'rxjs';
+
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -19,10 +19,13 @@ import {
 export class SquareService {
 
   squaresCollection: AngularFirestoreCollection<square>
-  squares: Observable<square[]>
+  squares: Observable<any[]>
+
+  private squareDoc: AngularFirestoreDocument<square>;
 
   constructor(public db: AngularFirestore) {
-    this.squaresCollection = db.collection<square>('squares');
+    this.squaresCollection = db.collection<square>('squares')
+    this.squares = this.squaresCollection.valueChanges()
   }
 
   createId() {
@@ -91,14 +94,14 @@ export class SquareService {
 
   }
 
-  public query(): any {
-    let squares = []
-    this.squaresCollection.ref.get().then(data => {
-      data.forEach(square => {
-        squares.push(square.data())
-      });
-    })
-    return squares
-  }
+  // public query(): any {
+  //   let squares = []
+  //   this.squaresCollection.ref.get().then(data => {
+  //     data.forEach(square => {
+  //       squares.push(square.data())
+  //     });
+  //   })
+  //   return squares
+  // }
 
 }
