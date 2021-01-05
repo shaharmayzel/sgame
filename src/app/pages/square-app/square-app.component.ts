@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { square } from 'src/app/models/square.model';
-import { SquareService } from '../../square.service'
+import { SquareService } from '../../services/square.service'
 import { Observable } from 'rxjs';
 // import service
 @Component({
@@ -15,7 +14,7 @@ export class SquareAppComponent implements OnInit {
   async ngOnInit(): Promise<void> {
 
     this.squares = this.squareService.squares
-    console.log(this.squares);
+
   }
 
 }
