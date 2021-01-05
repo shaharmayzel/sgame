@@ -1,11 +1,21 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Square } from 'src/app/models/square.model';
 import { SquareService } from '../../services/square.service'
+import { trigger, state, style, animate, transition, } from '@angular/animations';
+
+const squareAnimation = trigger('squareAnimation', [
+  state('*', style({ 'background-color': '{{color}}' }), { params: { color: 'pink' } }),
+  transition('void => *', animate('0s')),
+  transition('* <=> *', animate('1s'))
+]);
 
 @Component({
   selector: 'app-square-preview',
   templateUrl: './square-preview.component.html',
-  styleUrls: ['./square-preview.component.scss']
+  styleUrls: ['./square-preview.component.scss'],
+  animations: [
+    squareAnimation
+  ]
 })
 export class SquarePreviewComponent implements OnInit {
 
@@ -34,6 +44,8 @@ export class SquarePreviewComponent implements OnInit {
   public onChangeColor() { //on click event- color change update
     this.squareColor = this.randomHex()   //write new color to local color variable
     this.square.color = this.squareColor  //write new color in local square variable
-    this.squareService.updateSquare(this.square)  //send local square to service- update color in db
+    setTimeout(() => {//send local square to service- update color in db
+      this.squareService.updateSquare(this.square)
+    }, 1100);
   }
 }

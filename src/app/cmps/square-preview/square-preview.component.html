@@ -2,4 +2,8 @@
   class="square"
   (click)="onChangeColor()"
   [ngStyle]="{ 'background-color': this.squareColor }"
+  [@squareAnimation]="{
+    value: this.squareColor,
+    params: { color: this.squareColor }
+  }"
 ></p>

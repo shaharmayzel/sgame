@@ -8,9 +8,9 @@ describe('SquarePreviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SquarePreviewComponent ]
+      declarations: [SquarePreviewComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
