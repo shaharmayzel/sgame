@@ -5,13 +5,13 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: "AIzaSyDY_eZqTOBbUZMitnKSmqxZlkZbn4asXUg",
-    authDomain: "squares-28edf.firebaseapp.com",
-    projectId: "squares-28edf",
-    storageBucket: "squares-28edf.appspot.com",
-    messagingSenderId: "374516239185",
-    appId: "1:374516239185:web:be19dfc169698195e12170",
-    measurementId: "G-Z80M92CV4Q"
+    apiKey: "AIzaSyDlC7FFQt8J3aug8xClEDgIUcpIIlkMp9s",
+    authDomain: "sgame3d-edf2b.firebaseapp.com",
+    projectId: "sgame3d-edf2b",
+    storageBucket: "sgame3d-edf2b.appspot.com",
+    messagingSenderId: "347293375212",
+    appId: "1:347293375212:web:70c39544d294a0a5d0e3c9",
+    measurementId: "G-JKQ5G2V0FC"
   }
 };
 

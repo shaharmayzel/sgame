@@ -14,6 +14,7 @@ export class SquareAppComponent implements OnInit {
   async ngOnInit(): Promise<void> {
 
     this.squares = this.squareService.squares
+    // this.squareService.createSquareArray()
 
   }
 
